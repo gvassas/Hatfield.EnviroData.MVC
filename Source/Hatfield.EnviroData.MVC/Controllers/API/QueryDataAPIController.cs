@@ -16,10 +16,13 @@ namespace Hatfield.EnviroData.MVC.Controllers.API
     public class QueryDataAPIController : ApiController
     {
         private readonly IActionRepository _actionRepository;
+        private readonly IVariableRepository _variableRepository;
+         private readonly IRepository<Core.SamplingFeature> _samplingFeatureRepository;
 
-        public QueryDataAPIController(IActionRepository actionRepository)
+        public QueryDataAPIController(IActionRepository actionRepository, IVariableRepository variableRepository, IRepository<Core.SamplingFeature> samplingFeatureRepository)
         {
             _actionRepository = actionRepository;
+            _samplingFeatureRepository = samplingFeatureRepository;
         }
 
         [HttpGet]
@@ -29,6 +32,13 @@ namespace Hatfield.EnviroData.MVC.Controllers.API
 
             var items = Mapper.Map<IEnumerable<SampleListItemViewModel>>(allSamplingCollectionActions);
             return items.ToList();
+        }
+
+        [HttpGet]
+        public IEnumerable<Core.SamplingFeature> GetLocations()
+        {
+            var sites = _samplingFeatureRepository.GetAll().Where(x => x.CV_SamplingFeatureType.Term == "site");
+            return sites;
         }
 
         [HttpGet]

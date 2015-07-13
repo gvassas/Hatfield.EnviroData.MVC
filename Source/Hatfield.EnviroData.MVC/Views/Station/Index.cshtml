@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<table id="locationListTable" class="table table-condensed table-bordered table-hover"
+       style="width: auto;">
+    <thead>
+        <tr>
+            <th>
+                Station Id
+            </th>
+            <th>
+                Station Description
+            </th>
+            <th>
+                Station Type
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr data-bind="visible: HydroStations().length > 0">
+            <td colspan="3"><strong>Hydrology Stations</strong></td>
+        </tr>
+        <!-- ko foreach: Locations -->
+        <tr>
+            <td>
+                <a href="#" data-bind='click: function(){ $root.selectedRole(LocationIdentifier(), "WQ"); return false}, html: LocationIdentifier'>
+                </a>
+            </td>
+            <td data-bind="html: LocationDescription"></td>
+            <td data-bind="html: LocationType"></td>
+        </tr>
+        <!-- /ko -->
+        </table>
+
+        <script type="text/javascript" src="@Url.Content("~/Scripts/Locations/LocationList.js")"></script>
