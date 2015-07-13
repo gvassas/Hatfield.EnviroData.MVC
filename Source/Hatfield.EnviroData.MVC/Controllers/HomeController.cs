@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
+using System.Configuration;
 
 using Hatfield.EnviroData.Core;
-using System.Configuration;
 using Hatfield.EnviroData.CVUpdater;
-using System.Xml.Linq;
 
 namespace Hatfield.EnviroData.MVC.Controllers
 {
@@ -43,7 +43,7 @@ namespace Hatfield.EnviroData.MVC.Controllers
                 biz.CheckForDeleted(endpoint.Value, results.ExtractedEntities);
 
             }
-            return new EmptyResult();
+            return RedirectToAction("Index");
         }
     }
 }
