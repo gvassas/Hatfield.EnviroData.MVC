@@ -39,8 +39,8 @@ namespace Hatfield.EnviroData.MVC.Controllers
                 var doc = new XDocument();
                 var rawCV = parser.GetSingleCV(ApiUrl, endpoint.Value, "skos");
                 var results = parser.ImportXMLData(XDocument.Parse(rawCV));
-                biz.AddOrUpdateCVs(endpoint.Value, results.ExtractedEntities);
-                biz.CheckForDeleted(endpoint.Value, results.ExtractedEntities);
+                var addResults = biz.AddOrUpdateCVs(endpoint.Value, results.ExtractedEntities);
+               var deletedResults = biz.CheckForDeleted(endpoint.Value, results.ExtractedEntities);
 
             }
             return RedirectToAction("Index");

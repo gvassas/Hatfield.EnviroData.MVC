@@ -13,7 +13,10 @@
                 Station Id
             </th>
             <th>
-                Station Description
+                Station Latitude
+            </th>
+            <th>
+                Station Longitude
             </th>
             <th>
                 Station Type
@@ -21,19 +24,21 @@
         </tr>
     </thead>
     <tbody>
-        <tr data-bind="visible: HydroStations().length > 0">
-            <td colspan="3"><strong>Hydrology Stations</strong></td>
+        <tr data-bind="visible: Locations().length > 0">
+            <td colspan="3"><strong>Stations</strong></td>
         </tr>
         <!-- ko foreach: Locations -->
         <tr>
             <td>
-                <a href="#" data-bind='click: function(){ $root.selectedRole(LocationIdentifier(), "WQ"); return false}, html: LocationIdentifier'>
+                <a href="#" data-bind='html: SamplingFeatureID'>
                 </a>
             </td>
-            <td data-bind="html: LocationDescription"></td>
-            <td data-bind="html: LocationType"></td>
+            <td data-bind="html: Latitude"></td>
+            <td data-bind="html: Longitude"></td>
+            <td data-bind="html: SiteTypeCV"></td>
         </tr>
         <!-- /ko -->
+        </tbody>
         </table>
 
         <script type="text/javascript" src="@Url.Content("~/Scripts/Locations/LocationList.js")"></script>

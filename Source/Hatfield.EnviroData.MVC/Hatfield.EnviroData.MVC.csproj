@@ -254,6 +254,7 @@
     <Compile Include="Models\FtpFileImportDataViewModel.cs" />
     <Compile Include="Models\HttpFileImportDataViewModel.cs" />
     <Compile Include="Models\ResultMessageViewModel.cs" />
+    <Compile Include="Models\SiteViewModel.cs" />
     <Compile Include="Models\SampleListItemViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
