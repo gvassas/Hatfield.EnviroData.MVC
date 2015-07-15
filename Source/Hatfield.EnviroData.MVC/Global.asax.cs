@@ -33,6 +33,7 @@ namespace Hatfield.EnviroData.MVC
             //Create auto mapper
             AutoMapperConfiguration.Configure();
             Mapper.AssertConfigurationIsValid();
+            RouteTable.Routes.MapHubs();
         }
     }
 }
