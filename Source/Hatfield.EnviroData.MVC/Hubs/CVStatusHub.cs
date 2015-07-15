@@ -12,7 +12,7 @@ namespace Hatfield.EnviroData.MVC.Hubs
 {
     public class CVStatusHub: Hub
     {
-        public void Send(string name, string message)
+        public void Send(string message)
         {
             string ApiUrl = ConfigurationManager.AppSettings["ApiUrl"];
             string VocabSiteUrl = ConfigurationManager.AppSettings["VocabTermsUrl"];
@@ -28,12 +28,14 @@ namespace Hatfield.EnviroData.MVC.Hubs
                 var doc = new XDocument();
                 var rawCV = parser.GetSingleCV(ApiUrl, endpoint.Value, "skos");
                 var results = parser.ImportXMLData(XDocument.Parse(rawCV));
-                var addResults = biz.AddOrUpdateCVs(endpoint.Value, results.ExtractedEntities);
-                var deletedResults = biz.CheckForDeleted(endpoint.Value, results.ExtractedEntities);
+                message = biz.AddOrUpdateCVs(endpoint.Value, results.ExtractedEntities).Message;
+                Clients.All.addNewMessageToPage(message);
+                message = biz.CheckForDeleted(endpoint.Value, results.ExtractedEntities).Message;
+                Clients.All.addNewMessageToPage(message);
 
             }
             // Call the addNewMessageToPage method to update clients.
-            Clients.All.addNewMessageToPage(name, message);
+            
         }
     }
 }

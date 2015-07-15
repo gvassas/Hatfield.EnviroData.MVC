@@ -22,7 +22,7 @@
         <h3>Update CV Terms</h3>
         <ol class="round">
             <li class="one">
-                <h5>@Html.ActionLink("Load CVs", "CVUpdates", "Home")</h5>
+                <h5><a href="#" id="getcv">Load CVs</a></h5>
                 <br />
             </li>            
         </ol>
@@ -58,13 +58,12 @@
             // Add the message to the page.
             $('#cvStatus').append('<li>' + htmlEncode(message) + '</li>');
         };
-        // Get the user name and store it to prepend to messages.
-        $('#displayname').val(prompt('Enter your name:', ''));
-        // Set initial focus to message input box.
-        $('#message').focus();
-        // Start the connection.
         $.connection.hub.start().done(function () {
-
+            $("#getcv").click(function () {
+                // Call the chat method on the server
+                chat.server.send('');
+            });
+        });
         });
     });
     // This optional function html-encodes messages for display in the page.
